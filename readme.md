@@ -19,14 +19,13 @@ Add the alias in `config/app.php` to `aliases` array:
 'Beep' => Seleznev\Beep\Facade::class,
 ```
 
+For the Laravel **5.0** you should add `'Seleznev\Beep\ServiceProvider',` and `'Beep' => 'Seleznev\Beep\Facade',` respectively.
+
 ## Configuration
 
 To get started, you'll need to create a [Slack token](https://api.slack.com/web) or a [HipChat token](https://hipchat.com/admin/api).
 
-After that, you should publish configuration file:
-```bash
-php artisan vendor:publish
-```
+Add your `SLACK_TOKEN` and `HIPCHAT_TOKEN` to the `.env` file.
 
 ## Usage
 
@@ -76,10 +75,8 @@ Post::created(function ($post) {
 
 Add the service provider in `bootstrap/app.php` to `Register Service Providers` block:
 ```php
-$app->register(Seleznev\Beep\LumenServiceProvider::class);
+$app->register(Seleznev\Beep\ServiceProvider::class);
 ```
-
-And don't forget to add `SLACK_TOKEN` and `HIPCHAT_TOKEN` to your `.env` file.
 
 ```php
 app('beep')->slack('#channel')->say('Lumen');
