@@ -2,6 +2,7 @@
 
 namespace Seleznev\Beep;
 
+use Illuminate\Contracts\Container\Container;
 use Laravel\Lumen\Application as LumenApplication;
 use Illuminate\Foundation\Application as LaravelApplication;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
@@ -22,10 +23,8 @@ class ServiceProvider extends BaseServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__.'/../config/beep.php', 'beep');
-
-        $this->app->singleton('beep', function () {
-            return new Beep(config('beep'));
+        $this->app->singleton('beep', function (Container $app) {
+            return new Beep($app['config']);
         });
     }
 
@@ -36,13 +35,15 @@ class ServiceProvider extends BaseServiceProvider
      */
     public function boot()
     {
+        $source = realpath(__DIR__.'/../config/beep.php');
+
         if ($this->app instanceof LaravelApplication && $this->app->runningInConsole()) {
-            $this->publishes([
-                __DIR__.'/../config/beep.php' => config_path('beep.php')
-            ]);
+            $this->publishes([$source => config_path('beep.php')]);
         } elseif ($this->app instanceof LumenApplication) {
             $this->app->configure('beep');
         }
+
+        $this->mergeConfigFrom($source, 'beep');
     }
 
     /**

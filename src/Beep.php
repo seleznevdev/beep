@@ -2,6 +2,8 @@
 
 namespace Seleznev\Beep;
 
+use Illuminate\Contracts\Config\Repository;
+
 class Beep
 {
     /**
@@ -14,10 +16,10 @@ class Beep
     /**
      * Create a new Beep instance.
      *
-     * @param  array  $config
+     * @param  \Illuminate\Contracts\Config\Repository $config
      * @return void
      */
-    public function __construct(array $config)
+    public function __construct(Repository $config)
     {
         $this->config = $config;
     }
@@ -30,7 +32,9 @@ class Beep
      */
     public function slack($channel = '#general')
     {
-        return Slack::make($this->config['slack_token'], $channel);
+        $token = array_get($this->config, 'beep.slack_token');
+
+        return Slack::make($token, $channel);
     }
 
     /**
@@ -41,6 +45,8 @@ class Beep
      */
     public function hipchat($room)
     {
-        return Hipchat::make($this->config['hipchat_token'], $room);
+        $token = array_get($this->config, 'beep.hipchat_token');
+
+        return Hipchat::make($token, $room);
     }
 }
