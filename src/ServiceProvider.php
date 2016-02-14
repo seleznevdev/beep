@@ -2,6 +2,8 @@
 
 namespace Seleznev\Beep;
 
+use Laravel\Lumen\Application as LumenApplication;
+use Illuminate\Foundation\Application as LaravelApplication;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 
 class ServiceProvider extends BaseServiceProvider
@@ -34,9 +36,13 @@ class ServiceProvider extends BaseServiceProvider
      */
     public function boot()
     {
-        $this->publishes([
-            __DIR__.'/../config/beep.php' => config_path('beep.php'),
-        ]);
+        if ($this->app instanceof LaravelApplication && $this->app->runningInConsole()) {
+            $this->publishes([
+                __DIR__.'/../config/beep.php' => config_path('beep.php')
+            ]);
+        } elseif ($this->app instanceof LumenApplication) {
+            $this->app->configure('beep');
+        }
     }
 
     /**
