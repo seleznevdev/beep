@@ -1,6 +1,6 @@
 # Beep :mega:
 
-Beep is a lovely way to notify your team using [Slack](https://slack.com) or [HipChat](https://hipchat.com). Inspiration and the initial code was taken from [Laravel Envoy](https://github.com/laravel/envoy).
+Beep is a lightweight [Laravel](https://laravel.com) package for sending notifications to your team via [Slack](https://slack.com/) and [HipChat](https://hipchat.com/). Inspiration and the initial code was taken from [Laravel Envoy](https://github.com/laravel/envoy).
 
 ## Installation
 

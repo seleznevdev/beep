@@ -1,6 +1,6 @@
 {
     "name": "seleznev/beep",
-    "description": "Beep is a lovely way to notify your team using Slack or HipChat",
+    "description": "Beep is a lightweight Laravel package for sending notifications to your team via Slack and HipChat",
     "keywords": ["laravel", "lumen", "slack", "hipchat"],
     "homepage": "https://github.com/seleznevdev/beep",
     "license": "MIT",
