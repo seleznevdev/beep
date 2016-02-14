@@ -19,7 +19,7 @@ Add the alias in `config/app.php` to `aliases` array:
 'Beep' => Seleznev\Beep\Facade::class,
 ```
 
-For the Laravel **5.0** you should add `'Seleznev\Beep\ServiceProvider',` and `'Beep' => 'Seleznev\Beep\Facade',` respectively.
+For the Laravel 5.0.* you should add `'Seleznev\Beep\ServiceProvider',` and `'Beep' => 'Seleznev\Beep\Facade',` respectively.
 
 ## Configuration
 
